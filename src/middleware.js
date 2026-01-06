@@ -6,9 +6,9 @@ export async function middleware(request){
 
     const path = request.nextUrl.pathname
 
-    const isAllowedPath = ["/", "/register", "/login"].includes(path)
+    const isAllowedPath = ["/", "/register", "/login", "/invoice"].includes(path)
 
-    const token = await getToken({req:request, secret:process.env.NEXTAUTH_SECRET})
+    const token = await getToken({req:request, secret:process.env.SECRET_KEY})
 
     if(token && isAllowedPath){
         return NextResponse.redirect(new URL('/', request.url))
@@ -21,5 +21,5 @@ export async function middleware(request){
 }
 
 export const config = {
-    matcher: ['/login','/register','/invoice','/admin/:path*']
+    matcher: ['/login','/register','/admin/:path*']
 }
