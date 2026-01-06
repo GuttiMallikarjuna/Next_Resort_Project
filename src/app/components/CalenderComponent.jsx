@@ -8,44 +8,54 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 
 const CalenderComponent = ({onDatesSelect}) => {
     const [showCalender, setShowCalender] = useState(false)
-    const [date, setDate] = useState([
-        {
-            startDate: new Date(),
-      endDate: new Date(),
-      key: 'selection'
-        }
-    ])
+    const today = new Date();
+const tomorrow = new Date();
+tomorrow.setDate(today.getDate() + 1);
+
+const [date, setDate] = useState([
+  {
+    startDate: today,
+    endDate: tomorrow,
+    key: 'selection'
+  }
+]);
 
     const [selectedDates, setSelectedDates] = useState(null)
 
     const handleSelectDates = async()=>{
-        const startDate = date[0].startDate.toLocaleDateString();
-        const endDate = date[0].endDate.toLocaleDateString();
+      const startDate = new Date(date[0].startDate);
+    const endDate = new Date(date[0].endDate);
+
+    // Normalize time
+    startDate.setHours(0, 0, 0, 0);
+    endDate.setHours(0, 0, 0, 0);
         
-        setSelectedDates(`Selected Dates: ${startDate} - ${endDate}`)
-        setShowCalender(false)
+       setSelectedDates(
+      `Selected Dates: ${startDate.toDateString()} - ${endDate.toDateString()}`
+    );
 
-        const bookingDates = {startDate, endDate}
+    setShowCalender(false);
 
-        console.log("selectedDates form calender:",bookingDates)
-
-        if(onDatesSelect){
-            onDatesSelect(bookingDates)
-        }
+        // Send Date objects (not strings)
+    if (onDatesSelect) {
+      onDatesSelect({ startDate, endDate });
+    }
     }
 
-    const currentDate = new Date().toDateString();
-    const nextDate = new Date();
-    nextDate.setDate(nextDate.getDate()+1)
+    // const currentDate = new Date().toDateString();
+    // const nextDate = new Date();
+    // nextDate.setDate(nextDate.getDate()+1)
 
-    const formattedDate = nextDate.toDateString()
+    // const formattedDate = nextDate.toDateString()
 
   return (
     <div className='calenderSection'>
             <div className="currentDate" onClick={()=>setShowCalender(!showCalender)}>
                 {!selectedDates && (
                     <>
-                    {`${currentDate} - ${formattedDate}`}
+                     {`${new Date().toDateString()} - ${new Date(
+              Date.now() + 86400000
+            ).toDateString()}`}
                     </>
                 )}
                 {selectedDates && (
@@ -62,6 +72,7 @@ const CalenderComponent = ({onDatesSelect}) => {
          onChange={item => setDate([item.selection])}
          moveRangeOnFirstSelection={false}
          ranges={date}
+          minDate={new Date()}
           className='dateRange'
        />
         }

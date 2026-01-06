@@ -10,11 +10,15 @@ import Link from 'next/link'
 import CalenderComponent from '@/app/components/CalenderComponent'
 import { bookingAction } from '../serverActions/bookingAction'
 import { Circles } from 'react-loader-spinner'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 
 
 const DynamicProduct = () => {
     const [record, setRecord] = useState("")
+
+    const router = useRouter();
 
     const [selecetedDates, setSelectedDates] = useState(null)
 
@@ -26,7 +30,7 @@ const DynamicProduct = () => {
 
     const dynamicProductHandler = async()=>{
         
-        const response = await fetch(`https://next-resort-project.vercel.app/api/admin/product/${id}`)
+        const response = await fetch(`http://localhost:3000/api/admin/product/${id}`)
         const newData = await response.json()
 
         console.log("dynaic data:", newData)
@@ -36,6 +40,7 @@ const DynamicProduct = () => {
 
     useEffect(()=>{
         dynamicProductHandler()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const bookingHandler = async()=>{
@@ -49,6 +54,7 @@ const DynamicProduct = () => {
         const response = await bookingAction(bookingDetails)
         if(response.success){
           alert("Booking Successfull")
+          router.push("/invoice");
         }
       } catch (error) {
         
@@ -74,7 +80,7 @@ const DynamicProduct = () => {
               <div className="">
                <h2>{record.title}</h2>
               </div>
-              <img src={record.image} alt={record.title} className="singleImage"/>
+              <Image  src={record.image} alt={record.title} className="singleImage" width={650} height={450}></Image>
               </div>
               <div className="singleCenter">
                <div className="singlePrice">Rs.{record.price}</div>

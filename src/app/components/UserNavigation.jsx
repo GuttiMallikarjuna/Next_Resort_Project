@@ -17,7 +17,7 @@ const UserNavigation = ({userName}) => {
     </div>
     <Link href="/invoice" className='link'>
     <div className="bookings">
-      Bookings: 
+      Bookings
     </div>
     </Link>
     <p>Welcome: 

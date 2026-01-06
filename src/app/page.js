@@ -6,6 +6,8 @@ import { redirect } from 'next/navigation'
 import UserNavigation from './components/UserNavigation'
 import AdminPage from './admin/page'
 import ProductCollection from './components/ProductCollection'
+import Image from 'next/image'
+import bannerImg from '../../public/banner.jpg';
 
 const HomePage = async() => {
 
@@ -35,7 +37,7 @@ const HomePage = async() => {
       {session.role === 'user' &&  (
         <>
         <UserNavigation userName = {userName}/>
-        <img src='banner.jpg' alt='banner' className='bannerImage'/>
+        <Image src={bannerImg} alt='banner' className='bannerImage' width={250} height={250}></Image>
         <ProductCollection />
         </>
       ) }

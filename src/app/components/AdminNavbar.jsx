@@ -13,7 +13,9 @@ const AdminNavbar = () => {
    
    
    
-    <p>Welcome: Admin </p>
+    <p>Welcome: <span style={{color:'yellow', marginLeft:'5px', fontSize:'1.2rem', border:'none'}}>
+      Admin
+      </span> </p>
     <Link href="/api/auth/signout" className='link'>
     <div className="logout">
         Logout
