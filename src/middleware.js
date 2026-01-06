@@ -4,15 +4,12 @@ import { NextResponse } from "next/server";
 export async function middleware(request) {
   const path = request.nextUrl.pathname;
 
-  // Public routes (guest allowed)
-  const publicPaths = ["/", "/login", "/register"];
-
   const token = await getToken({
     req: request,
-    secret: process.env.NEXTAUTH_SECRET,
+    secret: process.env.AUTH_SECRET, // ✅ FIXED
   });
 
-  // 🚫 Guest trying to access protected routes
+  // 🚫 Guest accessing protected routes
   if (!token && (path.startsWith("/invoice") || path.startsWith("/admin"))) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
