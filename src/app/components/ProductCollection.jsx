@@ -15,7 +15,7 @@ const ProductCollection = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://next-resort-project-ten.vercel.app/api/admin/add-product`
+        `/api/admin/add-product`
       );
        if (!response.ok) {
       // API reachable but error status
