@@ -8,7 +8,7 @@ export async function middleware(request){
 
     const isAllowedPath = ["/", "/register", "/login"].includes(path)
 
-    const token = await getToken({req:request, secret:process.env.SECRET_KEY})
+    const token = await getToken({req:request, secret:process.env.NEXTAUTH_SECRET})
 
     if(token && isAllowedPath){
         return NextResponse.redirect(new URL('/', request.url))
