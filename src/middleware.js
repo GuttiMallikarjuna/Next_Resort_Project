@@ -1,27 +1,25 @@
-import { getToken } from "next-auth/jwt";
-import { NextResponse } from "next/server";
 
-export async function middleware(request) {
-  const path = request.nextUrl.pathname;
+import {getToken} from 'next-auth/jwt'
+import { NextResponse } from 'next/server'
 
-  const token = await getToken({
-    req: request,
-    secret: process.env.AUTH_SECRET, // ✅ FIXED
-  });
+export async function middleware(request){
 
-  // 🚫 Guest accessing protected routes
-  if (!token && (path.startsWith("/invoice") || path.startsWith("/admin"))) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
+    const path = request.nextUrl.pathname
 
-  // 🚫 Logged-in user accessing auth pages
-  if (token && (path === "/login" || path === "/register")) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
+    const isAllowedPath = ["/register", "/login"].includes(path)
 
-  return NextResponse.next();
+    const token = await getToken({req:request, secret:process.env.AUTH_SECRET})
+
+    if(token && isAllowedPath){
+        return NextResponse.redirect(new URL('/', request.url))
+    }
+    if(!token && !isAllowedPath){
+        return NextResponse.redirect(new URL('/login', request.url))
+    }
+    return NextResponse.next()
+
 }
 
 export const config = {
-  matcher: ["/login", "/register", "/invoice/:path*", "/admin/:path*"],
-};
+    matcher: ['/login','/register','/invoice','/admin/:path*']
+}
