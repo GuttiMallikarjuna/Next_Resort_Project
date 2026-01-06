@@ -54,7 +54,7 @@ const DynamicProduct = () => {
         const response = await bookingAction(bookingDetails)
         if(response.success){
           alert("Booking Successfull")
-          router.push("/invoice");
+          // router.push("/invoice");
         }
       } catch (error) {
         
