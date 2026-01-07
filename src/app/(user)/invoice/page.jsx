@@ -4,11 +4,15 @@ import { auth } from '@/app/auth'
 import UserInvoice from '@/app/components/UserInvoice'
 import UserNavigation from '@/app/components/UserNavigation'
 import UserModel from '@/app/utils/models/User'
+import { redirect } from 'next/navigation'
 import React from 'react'
 
 const InvoicePage = async() => {
 
   const session = await auth()
+  if (!session || !session.email) {
+  redirect("/login");
+}
 
   const email = session.email
 

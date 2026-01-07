@@ -17,6 +17,9 @@ export async function middleware(request) {
   if (token && isPublicPath) {
     return NextResponse.redirect(new URL("/", request.url));
   }
+   if (token?.role === "admin" && pathname === "/invoice") {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
 
   // 🔒 Not logged in & trying to access protected page
   if (!token && !isPublicPath) {

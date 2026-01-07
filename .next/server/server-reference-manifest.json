@@ -7,24 +7,8 @@
       "layer": {
         "app/(user)/login/page": "action-browser"
       }
-    },
-    "a8108449e8e21e02bd7559fea0dd3c6efcdc4b66": {
-      "workers": {
-        "app/(user)/register/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CINFM-Projects%5C%5Cresort-booking-gitclone%5C%5CNext_Resort_Project%5C%5Csrc%5C%5Capp%5C%5CserverActions%5C%5CregisterAction.js%22%2C%5B%22registerAction%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/(user)/register/page": "action-browser"
-      }
-    },
-    "34078aa03680d57bdb2453b735668c77b6e467b8": {
-      "workers": {
-        "app/(user)/detail/[id]/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22D%3A%5C%5CINFM-Projects%5C%5Cresort-booking-gitclone%5C%5CNext_Resort_Project%5C%5Csrc%5C%5Capp%5C%5CserverActions%5C%5CbookingAction.js%22%2C%5B%22bookingAction%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/(user)/detail/[id]/page": "action-browser"
-      }
     }
   },
   "edge": {},
-  "encryptionKey": "AJ0LK7kR7nRmywjPF/ADgRmwMpBBnG5JOpaVj1mzFRU="
+  "encryptionKey": "K1000O5XWXDS4m+B3fe50HMbilZHJZarDLAldIA5Eig="
 }
