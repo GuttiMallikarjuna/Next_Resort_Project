@@ -10,8 +10,12 @@ import React from 'react'
 const InvoicePage = async() => {
 
   const session = await auth()
-  if (!session || !session.email) {
+  if (!session?.user) {
   redirect("/login");
+}
+
+if (session.user.role === "admin") {
+  redirect("/");
 }
 
   const email = session.email
